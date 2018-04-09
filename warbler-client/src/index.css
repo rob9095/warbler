@@ -1,0 +1,192 @@
+body {
+  background-color: #e6ecf0;
+}
+
+/* Nav */
+
+.navbar {
+	margin-bottom: 1rem;
+}
+
+.navbar a {
+	font-weight: bold;
+	color: white;
+}
+
+.navbar a:hover {
+	color: white;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.navbar-brand > img {
+	display: inline-block;
+	width: 20px;
+	margin-bottom: 2px;
+	margin-right: 5px;
+	border-radius: 2px;
+}
+
+ul.nav.navbar-nav li {
+	margin: 0 0.5rem;
+}
+
+.onboarding > .navbar {
+	background-image: url('./images/nav-bg.png');
+	background-size: 100% 100%;
+}
+
+/* Home Page */
+
+.home-hero {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	z-index: -1;
+	background-image: url('./images/signed-out-home.jpg');
+	text-align: center;
+	padding: 1rem;
+	background-position: center center;
+	background-size: cover;
+	color: white;
+	text-shadow: 0 0 8px #66757f;
+}
+
+/* Messages */
+#messages .list-group {
+  display: flex;
+  align-items: flex-start;
+  padding: 7px 20px 12px;
+}
+
+#messages:not(.no-hover) .list-group-item:hover {
+  background-color: #e6ecf0;
+}
+
+.timeline-image {
+  border-radius: 50px;
+  height: 49px;
+  width: 48px;
+  margin: 2px 30px 10px 10px;
+}
+
+btn:hover {
+  cursor: pointer;
+}
+
+a.btn.btn-danger,
+a.btn.btn-danger:hover,
+a.btn.btn-success,
+a.btn.btn-success:hover {
+  color: white;
+}
+
+.message-container,
+.col-sm-8 {
+  position: inherit;
+}
+
+
+/* User Profile Widget */
+
+.user-box {
+  position: relative;
+  width: 325px;
+  height: 215px;
+  font-family: Signika;
+  background: #fff;
+	border-radius: 5px;
+	border: 15px solid white;
+}
+.user-box .user {
+  width: 100%;
+  height: 115px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-box .user-image-wrapper {
+  width: 75px;
+  height: 75px;
+}
+.user-box .user-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-position: -50px 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+	margin-left:-30px;
+	margin: -10px 0 0 -80px;
+}
+.user-box .user-info {
+	margin: -10px 0 0 25px;
+  position: absolute;
+}
+.user-box .user-name {
+  font-weight: 400;
+  color: #5e6d81;
+	font-size: 24px;
+}
+.user-box .user-name:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+.user-box .user-username {
+  padding-top: 2px;
+  font-weight: 300;
+}
+.user-box .user-username:hover {
+  text-decoration: underline;
+	cursor: pointer;
+}
+.user-box .blocks {
+  height: 85px;
+  width: 100%;
+  display: flex;
+	justify-content: space-around;
+}
+.user-box .blocks .user-stat {
+	font-weight:bold;
+	font-size:20px;
+}
+.user-box .blocks .user-messages,
+.user-box .blocks .user-following,
+.user-box .blocks .user-followers {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 88px;
+  height: 66px;
+  color: #fff;
+  font-weight: 300;
+}
+.user-box .blocks .user-messages {
+  background: #14b9d6;
+	border: 5px solid #14b9d6;
+	border-radius: 5px;
+}
+.user-box .blocks .user-following {
+  background: #f27935;
+	border: 5px solid #f27935;
+	border-radius: 5px;
+}
+.user-box .blocks .user-followers {
+  background: #1fbba6;
+	border: 5px solid #1fbba6;
+	border-radius: 5px;
+}
+.blocks .user-followers:hover,
+.user-following:hover,
+.user-messages:hover {
+	opacity: .8;
+	cursor: pointer;
+}
