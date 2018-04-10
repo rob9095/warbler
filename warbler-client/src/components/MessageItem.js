@@ -3,7 +3,7 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import DefaultProfileImg from '../images/default-profile-image.jpg';
 
-const MessageItem = ({isFollowing, date, profileImageUrl, text, username, removeMessage, followUser, unFollowUser, isCorrectUser }) => (
+const MessageItem = ({isFollowing, date, profileImageUrl, text, username, removeMessage, followUser, unFollowUser, isCorrectUser, fetchUserData }) => (
   <div>
     <li className="list-group-item">
       <img src={profileImageUrl || DefaultProfileImg} alt={username} height="100" width="100" className="timeline-image" />
@@ -17,7 +17,7 @@ const MessageItem = ({isFollowing, date, profileImageUrl, text, username, remove
         <p>{text}</p>
 		<div className="">
 			{isCorrectUser && (<a className="btn btn-danger" onClick={removeMessage}>Delete</a>)}
-			{!isCorrectUser&& (isFollowing ? <a className="btn btn-success" onClick={unFollowUser}>Un-Follow</a> : <a className="btn btn-success" onClick={followUser}>Follow</a>)}
+			{!isCorrectUser&& (isFollowing ? <a className="btn btn-success" onClick={async function(event){ await unFollowUser(); fetchUserData()}}>Un-Follow</a> : <a className="btn btn-success" onClick={async function(event){ await followUser(); fetchUserData()}}>Follow</a>)}
 		</div>
 	  </div>
     </li>

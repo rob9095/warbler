@@ -15,10 +15,12 @@ const ProfileTimeline = props => {
 				currentUser={props.currentUser}
 				profileUser={props.profileUser}
 				profileMessages={props.profileMessages}
+				userData={props.userData}
 			/>
 			<ProfileMessageList
 				profileUser={props.profileUser}
 				profileMessages={props.profileMessages}
+				userData={props.userData}
 			/>
 		</div>
 	);
