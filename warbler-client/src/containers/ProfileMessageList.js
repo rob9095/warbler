@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMessages, removeMessage } from '../store/actions/messages';
 import { followUser, unFollowUser, fetchFollowers, fetchFollowing } from '../store/actions/followers';
+import { fetchUserData } from '../store/actions/users';
 import MessageItem from '../components/MessageItem';
 
 class ProfileMessageList extends Component {
@@ -12,7 +13,7 @@ class ProfileMessageList extends Component {
   }
 
   render() {
-  const { messages, followers, following, removeMessage, followUser, unFollowUser, currentUser, profileMessages, profileUser } = this.props;
+  const { messages, followers, following, removeMessage, followUser, unFollowUser, currentUser, profileMessages, profileUser, userData, fetchUserData } = this.props;
 	let messageList = profileMessages.map(m => (
       <MessageItem
         key={m._id}
@@ -22,7 +23,8 @@ class ProfileMessageList extends Component {
         profileImageUrl={m.user.profileImageUrl}
         removeMessage={removeMessage.bind(this, m.user._id, m._id)}
         followUser={followUser.bind(this, m.user._id, currentUser)}
-		    unFollowUser={unFollowUser.bind(this, m.user._id, currentUser)}
+		fetchUserData={fetchUserData.bind(this, m.user.username)}
+		unFollowUser={unFollowUser.bind(this, m.user._id, currentUser)}
         isCorrectUser={currentUser === m.user._id}
         isFollowing={following.includes(m.user._id)}
       />
@@ -44,8 +46,9 @@ function mapStateToProps(state) {
     messages: state.messages,
     followers: state.followers,
     following: state.following,
-    currentUser: state.currentUser.user.id
+    currentUser: state.currentUser.user.id,
+	userData: state.userData
   };
 }
 
-export default connect(mapStateToProps, { fetchMessages, removeMessage, followUser, unFollowUser, fetchFollowers, fetchFollowing })(ProfileMessageList);
+export default connect(mapStateToProps, { fetchMessages, removeMessage, followUser, unFollowUser, fetchFollowers, fetchFollowing, fetchUserData })(ProfileMessageList);
