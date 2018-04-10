@@ -7,14 +7,18 @@ export const loadUser = userData => ({
   userData
 });
 
-export const fetchUserData = (username) => {
-  return dispatch => {
-    return apiCall('get', `/api/users/${username}`)
-    .then((res) => {
-      dispatch(loadUser(res));
-    })
-    .catch(err => {
-      dispatch(addError(err.message));
-    });
-  };
+export function fetchUserData(username) {
+	return dispatch => {
+		return new Promise((resolve,reject) => {
+			return apiCall('get', `/api/users/${username}`)
+			.then((res) => {
+			  dispatch(loadUser(res));
+			  resolve();
+			})
+			.catch(err => {
+			  dispatch(addError(err.message));
+			  reject();		  
+			})
+		});
+	}
 };
