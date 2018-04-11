@@ -95,98 +95,88 @@ a.btn.btn-success:hover {
 
 /* User Profile Widget */
 
-.user-box {
-  position: relative;
+user-card.mdl-card {
   width: 325px;
-  height: 215px;
-  font-family: Signika;
-  background: #fff;
-	border-radius: 5px;
-	border: 15px solid white;
+	height: 300px;
 }
-.user-box .user {
-  width: 100%;
-  height: 115px;
-  background: #fff;
-  display: flex;
-  align-items: center;
+.user-card .mdl-card__title {
+  height: 166px;
+	display: flex;
   justify-content: center;
+  align-items: center;
+	flex-direction: column;
+	font-family: Roboto;
+	text-align: center;
 }
-.user-box .user-image-wrapper {
-  width: 75px;
-  height: 75px;
+.user-card .mdl-card__title img {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
 }
-.user-box .user-image {
-  width: 80px;
-  height: 80px;
+.user-card .user-name {
+	margin-top: 5px;
+	font-weight: bold;
+	font-size: 21px
+}
+.user-card .user-username a {
+	margin-top: 5px;
+	font-size: 14px;
+  color: #000;
+}
+.user-card .user-profile-image {
   border-radius: 50%;
-  background-position: -50px 0;
-  background-size: cover;
-  background-repeat: no-repeat;
-	margin-left:-30px;
-	margin: -10px 0 0 -80px;
 }
-.user-box .user-info {
-	margin: -10px 0 0 25px;
-  position: absolute;
+.mdl-card__supporting-text {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }
-.user-box .user-name {
-  font-weight: 400;
-  color: #5e6d81;
-	font-size: 24px;
+.user-stat {
+	width: 100%;
+	height: 45px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
-.user-box .user-name:hover {
-	text-decoration: underline;
-	cursor: pointer;
+.user-stat.middle {
+	border-right: 1px solid rgba(0,0,0,.1);
+	border-left: 1px solid rgba(0,0,0,.1);
 }
-.user-box .user-username {
-  padding-top: 2px;
-  font-weight: 300;
+.user-stat .stat {
+	font-weight: bold;
+	font-size: 20px;
+	color: ;
 }
-.user-box .user-username:hover {
-  text-decoration: underline;
-	cursor: pointer;
-}
-.user-box .blocks {
-  height: 85px;
-  width: 100%;
-  display: flex;
-	justify-content: space-around;
-}
-.user-box .blocks .user-stat {
-	font-weight:bold;
-	font-size:20px;
-}
-.user-box .blocks .user-messages,
-.user-box .blocks .user-following,
-.user-box .blocks .user-followers {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  width: 88px;
-  height: 66px;
+.user-card .mdl-card__menu {
   color: #fff;
-  font-weight: 300;
 }
-.user-box .blocks .user-messages {
-  background: #14b9d6;
-	border: 5px solid #14b9d6;
-	border-radius: 5px;
+.mdl-button.follow-btn {
+	width: 275px;
+	font-weight: bold;
 }
-.user-box .blocks .user-following {
-  background: #f27935;
-	border: 5px solid #f27935;
-	border-radius: 5px;
+.hidden {
+	display: none;
 }
-.user-box .blocks .user-followers {
-  background: #1fbba6;
-	border: 5px solid #1fbba6;
-	border-radius: 5px;
+.mdl-card__actions {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.blocks .user-followers:hover,
-.user-following:hover,
-.user-messages:hover {
-	opacity: .8;
-	cursor: pointer;
+
+/* drawer */
+.user-image-wrapper.drawer {
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	height: 100px;
+	background: #f0f0f0;
+}
+
+.user-image-wrapper.drawer .mdl-layout-title {
+	margin-left: 20px;
+}
+.user-image-wrapper.drawer .user-profile-image {
+  border-radius: 50%;
 }

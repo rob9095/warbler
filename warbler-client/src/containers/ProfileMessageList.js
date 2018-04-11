@@ -22,10 +22,10 @@ class ProfileMessageList extends Component {
         username={m.user.username}
         profileImageUrl={m.user.profileImageUrl}
         removeMessage={removeMessage.bind(this, m.user._id, m._id)}
-        followUser={followUser.bind(this, m.user._id, currentUser)}
-		fetchUserData={fetchUserData.bind(this, m.user.username)}
-		unFollowUser={unFollowUser.bind(this, m.user._id, currentUser)}
-        isCorrectUser={currentUser === m.user._id}
+        followUser={followUser.bind(this, m.user._id, currentUser.user.id)}
+		    fetchUserData={fetchUserData.bind(this, profileUser)}
+		    unFollowUser={unFollowUser.bind(this, m.user._id, currentUser.user.id)}
+        isCorrectUser={currentUser.user.id === m.user._id}
         isFollowing={following.includes(m.user._id)}
       />
   ));
@@ -46,8 +46,7 @@ function mapStateToProps(state) {
     messages: state.messages,
     followers: state.followers,
     following: state.following,
-    currentUser: state.currentUser.user.id,
-	userData: state.userData
+	  userData: state.userData
   };
 }
 

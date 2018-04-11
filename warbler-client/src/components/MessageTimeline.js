@@ -11,10 +11,15 @@ const MessageTimeline = props => {
 				messages={props.messages}
 				followers={props.followers}
 				following={props.following}
-				userMessages={props.userMessages}
 				currentUser={props.currentUser}
+				profileUser={props.profileUser}
+				profileMessages={props.profileMessages}
+				userData={props.userData}
 			/>
-			<MessageList />
+			<MessageList
+				currentUser={props.currentUser}
+				userData={props.userData}
+				 />
 		</div>
 	);
 };

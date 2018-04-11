@@ -1,29 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ProfileMessageList from '../containers/ProfileMessageList'
 import UserAside from './UserAside';
 
-const ProfileTimeline = props => {
-	return (
-		<div className='row'>
-			<UserAside
-				profileImageUrl={props.profileImageUrl}
-				username={props.username}
-				messages={props.messages}
-				followers={props.followers}
-				following={props.following}
-				userMessages={props.userMessages}
-				currentUser={props.currentUser}
-				profileUser={props.profileUser}
-				profileMessages={props.profileMessages}
-				userData={props.userData}
-			/>
-			<ProfileMessageList
-				profileUser={props.profileUser}
-				profileMessages={props.profileMessages}
-				userData={props.userData}
-			/>
-		</div>
-	);
+class ProfileTimeline extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {}
+	}
+
+	render(){
+		const { username, currentUser, profileUser, userData, following, followers, isCorrectUser, isFollowing, profileMessages }= this.props;
+		{if(!userData){
+			return <div />
+		}}
+		return (
+			<div className='row'>
+				<UserAside
+					username={username}
+					followers={followers}
+					following={following}
+					currentUser={currentUser}
+					profileUser={profileUser}
+					profileMessages={profileMessages}
+					userData={userData}
+					isCorrectUser = {currentUser.user.username === profileUser}
+					isFollowing = {following.includes(userData.id)}
+				/>
+				<ProfileMessageList
+					profileUser={profileUser}
+					profileMessages={profileMessages}
+					userData={userData}
+					currentUser={currentUser}
+				/>
+			</div>
+		);
+	}
 };
 
 export default ProfileTimeline;
