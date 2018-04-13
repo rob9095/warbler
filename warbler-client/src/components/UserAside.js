@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { followUser, unFollowUser } from '../store/actions/followers';
-import { fetchUserData } from '../store/actions/users';
 import DefaultProfileWidgetBg from '../images/default-user-bg.png';
 import DefaultProfileImg from '../images/default-profile-image.jpg';
 
@@ -18,7 +15,7 @@ class UserAside extends Component {
 	}
 
 	render(){
-		const { username, currentUser, profileUser, userData, following, followers, isCorrectUser, isFollowing }= this.props;
+		const { username, currentUser, profileUser, userData, following, followers, isCorrectUser, isFollowing, followUser, unFollowUser, fetchUserData }= this.props;
 		const inlineUserWidgetStyles = {
 			backgroundImage: `url('${DefaultProfileWidgetBg}')`
 		}
@@ -50,13 +47,13 @@ class UserAside extends Component {
 				  <div className="mdl-card__actions mdl-card--border">
 						{!isCorrectUser && (isFollowing ?
 							<button
-								onClick={ async function(event){ await unFollowUser.bind(this, userData.id, currentUser.user.id); fetchUserData.bind(this, userData.username)}}
+								onClick={ async function(event){ await unFollowUser(); fetchUserData()}}
 								id="follow_button"
 								className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect follow-btn"
 							>Following <i className="material-icons">done</i>
 						</button> :
 						<button
-							onClick={ async function(event){ await followUser.bind(this, userData.id, currentUser.user.id); fetchUserData.bind(this, userData.username)}}
+							onClick={ async function(event){ await followUser(); fetchUserData()}}
 							id="follow_button"
 							className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect follow-btn"
 							>Follow
@@ -74,14 +71,4 @@ class UserAside extends Component {
 
 }
 
-function mapStateToProps(state) {
-  return {
-		currentUser: state.currentUser,
-    messages: state.messages,
-    followers: state.followers,
-    following: state.following,
-		user: state.user.userData
-  };
-}
-
-export default connect(mapStateToProps, { fetchUserData,  followUser, unFollowUser })(UserAside);
+export default UserAside;

@@ -12,9 +12,9 @@ const MessageTimeline = props => {
 				followers={props.followers}
 				following={props.following}
 				currentUser={props.currentUser}
-				profileUser={props.profileUser}
-				profileMessages={props.profileMessages}
 				userData={props.userData}
+				isCorrectUser = {true}
+				isFollowing = {false}				
 			/>
 			<MessageList
 				currentUser={props.currentUser}

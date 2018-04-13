@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ProfileMessageList from '../containers/ProfileMessageList'
+import { followUser, unFollowUser } from '../store/actions/followers';
+import { fetchUserData } from '../store/actions/users';
 import UserAside from './UserAside';
 
 class ProfileTimeline extends Component {
@@ -9,7 +12,7 @@ class ProfileTimeline extends Component {
 	}
 
 	render(){
-		const { username, currentUser, profileUser, userData, following, followers, isCorrectUser, isFollowing, profileMessages }= this.props;
+		const { username, currentUser, profileUser, userData, following, followers, isCorrectUser, isFollowing, profileMessages, followUser, unFollowUser, fetchUserData }= this.props;
 		{if(!userData){
 			return <div />
 		}}
@@ -25,6 +28,9 @@ class ProfileTimeline extends Component {
 					userData={userData}
 					isCorrectUser = {currentUser.user.username === profileUser}
 					isFollowing = {following.includes(userData.id)}
+					followUser={followUser.bind(this, userData.id, currentUser.user.id)}
+					unFollowUser={unFollowUser.bind(this, userData.id, currentUser.user.id)}
+					fetchUserData={fetchUserData.bind(this,userData.username)}
 				/>
 				<ProfileMessageList
 					profileUser={profileUser}
@@ -37,4 +43,13 @@ class ProfileTimeline extends Component {
 	}
 };
 
-export default ProfileTimeline;
+function mapStateToProps(state) {
+  return {
+    messages: state.messages,
+    followers: state.followers,
+    following: state.following,
+    currentUser: state.currentUser
+  };
+}
+
+export default connect(mapStateToProps, {followUser, unFollowUser, fetchUserData})(ProfileTimeline);

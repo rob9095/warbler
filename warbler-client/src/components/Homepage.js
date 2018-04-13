@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MessageTimeLine from './MessageTimeline';
 import { fetchMessages } from '../store/actions/messages';
+import { fetchUserData } from '../store/actions/users';
 import { fetchFollowers, fetchFollowing } from '../store/actions/followers';
 import {  Link } from 'react-router-dom';
 
@@ -14,13 +15,15 @@ class Homepage extends Component {
 
 	componentDidMount() {
 		this.props.fetchMessages();
+		this.props.fetchUserData(this.props.currentUser.user.username);
+		// replace with one call to get all user data for current user
+		// getUserData to backend function getUser
 		this.props.fetchFollowers(this.props.currentUser.user.id);
 		this.props.fetchFollowing(this.props.currentUser.user.id);
 	}
 
 	render(){
-		const { messages, followers, following, currentUser } = this.props;
-		let userMessages = messages.filter(m => (m.user._id === currentUser.user.id))
+		const { messages, followers, following, currentUser, user } = this.props;
 		if(!currentUser.isAuthenticated){
 			return (
 				<div className="home-hero">
@@ -37,9 +40,10 @@ class Homepage extends Component {
 					currentUser={currentUser}
 					profileImageUrl={currentUser.user.profileImageUrl}
 					username={currentUser.user.username}
-					userMessages={userMessages}
+					messages={messages}
 					followers={followers}
 					following={following}
+					userData={user}
 			/>
 		);
 	}
@@ -48,10 +52,12 @@ class Homepage extends Component {
 
 function mapStateToProps(state) {
   return {
+		currentUser: state.currentUser,
     messages: state.messages,
     followers: state.followers,
     following: state.following,
+		user: state.user.userData
   };
 }
 
-export default connect(mapStateToProps, { fetchMessages, fetchFollowers, fetchFollowing })(Homepage);
+export default connect(mapStateToProps, { fetchUserData, fetchMessages, fetchFollowers, fetchFollowing })(Homepage);
