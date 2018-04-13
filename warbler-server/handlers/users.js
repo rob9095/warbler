@@ -5,7 +5,8 @@ exports.getUser = async function(req, res, next) {
 	try {
 		let user = await db.User.findOne({username: req.params.username});
 		return res.status(200).json({
-      username: user.username,
+			id: user._id,
+			username: user.username,
       profileImageUrl: user.profileImageUrl,
       messages: user.messages,
       followers: user.followers,

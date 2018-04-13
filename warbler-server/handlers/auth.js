@@ -6,7 +6,7 @@ exports.signin = async function(req, res, next) {
 		let user = await db.User.findOne({
 			email: req.body.email
 		});
-		let { id, username, profileImageUrl } = user;
+		let { id, username, profileImageUrl, messages, following, followers } = user;
 		let isMatch = await user.comparePassword(req.body.password);
 		if(isMatch){
 			let token = jwt.sign(
@@ -21,6 +21,9 @@ exports.signin = async function(req, res, next) {
 				id,
 				username,
 				profileImageUrl,
+				messages,
+				following,
+				followers,
 				token
 			});
 		} else {
@@ -28,19 +31,19 @@ exports.signin = async function(req, res, next) {
 				status: 400,
 				message: 'Invalid email or password'
 			})
-		}		
+		}
 	} catch(err) {
 		return next({
 			status: 400,
 			message: 'Invalid email or password'
-		})		
+		})
 	}
 };
 
 exports.signup = async function(req, res, next){
 	try {
 		let user = await db.User.create(req.body);
-		let { id, username, profileImageUrl } = user;
+		let { id, username, profileImageUrl, messages, following, followers } = user;
 		let token = jwt.sign(
 		{
 			id,
@@ -53,6 +56,9 @@ exports.signup = async function(req, res, next){
 			id,
 			username,
 			profileImageUrl,
+			messages,
+			following,
+			followers,
 			token
 		});
 	} catch(err) {
@@ -63,6 +69,6 @@ exports.signup = async function(req, res, next){
 			status:400,
 			message: err.message
 		});
-		
+
 	}
 };
