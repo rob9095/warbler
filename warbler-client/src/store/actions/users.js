@@ -17,7 +17,7 @@ export function fetchUserData(username) {
 			})
 			.catch(err => {
 			  dispatch(addError(err.message));
-			  reject();		  
+			  reject();
 			})
 		});
 	}
