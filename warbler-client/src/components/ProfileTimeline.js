@@ -48,7 +48,8 @@ function mapStateToProps(state) {
     messages: state.messages,
     followers: state.followers,
     following: state.following,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+		user: state.user.userData
   };
 }
 

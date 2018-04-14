@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchMessages, removeMessage } from '../store/actions/messages';
+import { followUser, unFollowUser, fetchFollowers, fetchFollowing } from '../store/actions/followers';
+import { fetchUserData } from '../store/actions/users';
 import DefaultProfileWidgetBg from '../images/default-user-bg.png';
 import DefaultProfileImg from '../images/default-profile-image.jpg';
 
 class UserAside extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			userData: {}
-		}
-	}
-
-	componentDidMount() {
+		this.state = {}
 	}
 
 	render(){
@@ -24,7 +23,7 @@ class UserAside extends Component {
 			return <div />
 		}}
 		return(
-			<aside className="col-sm-3">
+			<aside className="col-lg-4">
 				<div className="user-card mdl-card mdl-shadow--2dp">
 				  <div className="mdl-card__title" style={inlineUserWidgetStyles}>
 				    <div className="user-image-wrapper">
@@ -51,19 +50,47 @@ class UserAside extends Component {
 								id="follow_button"
 								className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect follow-btn"
 							>Following <i className="material-icons">done</i>
-						</button> :
+						</button>
+						:
 						<button
 							onClick={ async function(event){ await followUser(); fetchUserData()}}
 							id="follow_button"
 							className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect follow-btn"
 							>Follow
 						</button>)}
+						{isCorrectUser && (
+						<div className="mdl-card__user-options">
+							<div className="user-option">
+								<button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+									<i className="material-icons">settings</i>
+								</button>
+							</div>
+							<div className="user-option">
+								<button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+									<i className="material-icons">forum</i>
+								</button>
+							</div>
+							<div className="user-option">
+								<button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+									<i className="material-icons">favorite</i>
+								</button>
+							</div>
+							<div className="user-option">
+								<button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+									<i className="material-icons">add</i>
+								</button>
+							</div>
+						</div>
+						)}
+
 				  </div>
-				  <div className="mdl-card__menu">
-				    <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-				      <i className="material-icons">edit</i>
-				    </button>
-				  </div>
+					{/* {isCorrectUser && (
+						<div className="mdl-card__menu">
+					    <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+					      <i className="material-icons">edit</i>
+					    </button>
+					  </div>
+					)} */}
 				</div>
 			</aside>
 		)
@@ -71,4 +98,13 @@ class UserAside extends Component {
 
 }
 
-export default UserAside;
+function mapStateToProps(state) {
+  return {
+    messages: state.messages,
+    followers: state.followers,
+    following: state.following,
+	  userData: state.user.userData
+  };
+}
+
+export default connect(mapStateToProps, { fetchMessages, removeMessage, followUser, unFollowUser, fetchFollowers, fetchFollowing, fetchUserData })(UserAside);

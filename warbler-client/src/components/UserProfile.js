@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router-dom';
 import { fetchMessages } from '../store/actions/messages';
 import { fetchUserData } from '../store/actions/users';
 import { fetchFollowers, fetchFollowing } from '../store/actions/followers';
@@ -12,6 +13,12 @@ class UserProfile extends Component {
 		super(props);
 		this.state = {}
 	}
+
+	// componentWillUpdate() {
+	// 	if (this.props.match.params.username != this.props.currentUser.user.username) {
+	// 		console.log(this.state.user.userData);
+	// 	}
+	// }
 
 	componentDidMount() {
 		this.props.fetchMessages();
@@ -85,4 +92,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchUserData, fetchMessages, fetchFollowers, fetchFollowing })(UserProfile);
+export default withRouter(connect(mapStateToProps, { fetchUserData, fetchMessages, fetchFollowers, fetchFollowing })(UserProfile));
