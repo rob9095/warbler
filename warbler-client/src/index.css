@@ -95,7 +95,15 @@ a.btn.btn-success:hover {
 
 /* User Profile Widget */
 
-user-card.mdl-card {
+aside.col-lg-4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user-card.mdl-card {
+  position: fixed;
   width: 325px;
 	height: 300px;
 }
@@ -107,10 +115,6 @@ user-card.mdl-card {
 	flex-direction: column;
 	font-family: Roboto;
 	text-align: center;
-}
-.user-card .mdl-card__title img {
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%);
 }
 .user-card .user-name {
 	margin-top: 5px;
@@ -163,6 +167,23 @@ user-card.mdl-card {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.mdl-card__user-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.mdl-card__user-options .user-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 36px;
+  color: rgba(0,0,0,.54);
 }
 
 /* drawer */
