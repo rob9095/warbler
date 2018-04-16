@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchMessages, removeMessage } from '../store/actions/messages';
-import { followUser, unFollowUser, fetchFollowers, fetchFollowing } from '../store/actions/followers';
+import { followUser, unFollowUser, } from '../store/actions/followers';
 import { fetchUserData } from '../store/actions/users';
 import DefaultProfileWidgetBg from '../images/default-user-bg.png';
 import DefaultProfileImg from '../images/default-profile-image.jpg';
@@ -10,11 +10,24 @@ import DefaultProfileImg from '../images/default-profile-image.jpg';
 class UserAside extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {};
+
+		this.handleFollow = this.handleFollow.bind(this);
+		this.handleUnFollow = this.handleUnFollow.bind(this);
+	}
+
+	async handleFollow(){
+		await this.props.followUser(this.props.userData.id,this.props.currentUser.user.id);
+		this.props.fetchUserData(this.props.userData.username);
+	}
+
+	async handleUnFollow(){
+		await this.props.unFollowUser(this.props.userData.id,this.props.currentUser.user.id);
+		this.props.fetchUserData(this.props.userData.username);
 	}
 
 	render(){
-		const { username, currentUser, profileUser, userData, following, followers, isCorrectUser, isFollowing, followUser, unFollowUser, fetchUserData }= this.props;
+		const { username, currentUser, profileUser, userData, isCorrectUser, isFollowing }= this.props;
 		const inlineUserWidgetStyles = {
 			backgroundImage: `url('${DefaultProfileWidgetBg}')`
 		}
@@ -35,7 +48,7 @@ class UserAside extends Component {
 						</div>
 				    <div className="user-info">
 				      <div className="user-name">{userData.username}</div>
-				      <div className="user-username"><a href={`/users/${userData.username}/profile`}>@{userData.username}</a></div>
+				      <div className="user-username"><Link to={`/users/${userData.username}/profile`}>@{userData.username}</Link></div>
 				    </div>
 				  </div>
 				  <div className="mdl-card__supporting-text">
@@ -46,14 +59,14 @@ class UserAside extends Component {
 				  <div className="mdl-card__actions mdl-card--border">
 						{!isCorrectUser && (isFollowing ?
 							<button
-								onClick={ async function(event){ await unFollowUser(); fetchUserData()}}
+								onClick={this.handleUnFollow}
 								id="follow_button"
 								className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect follow-btn"
 							>Following <i className="material-icons">done</i>
 						</button>
 						:
 						<button
-							onClick={ async function(event){ await followUser(); fetchUserData()}}
+							onClick={this.handleFollow}
 							id="follow_button"
 							className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect follow-btn"
 							>Follow
@@ -101,10 +114,8 @@ class UserAside extends Component {
 function mapStateToProps(state) {
   return {
     messages: state.messages,
-    followers: state.followers,
-    following: state.following,
 	  userData: state.user.userData
   };
 }
 
-export default connect(mapStateToProps, { fetchMessages, removeMessage, followUser, unFollowUser, fetchFollowers, fetchFollowing, fetchUserData })(UserAside);
+export default connect(mapStateToProps, { fetchMessages, removeMessage, unFollowUser, followUser, fetchUserData })(UserAside);

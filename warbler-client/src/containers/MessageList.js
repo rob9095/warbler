@@ -17,6 +17,7 @@ class MessageList extends Component {
     let messageList = messages.map(m => (
       <MessageItem
         key={m._id}
+        messageKey={m._id}
         date={m.createdAt}
         text={m.text}
         username={m.user.username}

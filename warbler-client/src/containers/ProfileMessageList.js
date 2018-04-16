@@ -17,6 +17,7 @@ class ProfileMessageList extends Component {
 	let messageList = profileMessages.map(m => (
       <MessageItem
         key={m._id}
+        messageKey = {m._id}
         date={m.createdAt}
         text={m.text}
         username={m.user.username}

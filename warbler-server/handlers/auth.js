@@ -13,7 +13,10 @@ exports.signin = async function(req, res, next) {
 			{
 				id,
 				username,
-				profileImageUrl
+				profileImageUrl,
+				followers,
+				messages,
+				following
 			},
 				process.env.SECRET_KEY
 			);

@@ -10,23 +10,30 @@ import {  Link } from 'react-router-dom';
 class Homepage extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {
+			isLoading: true
+		}
 	}
 
-	componentDidMount() {
-		this.props.fetchMessages();
-		this.props.fetchUserData(this.props.currentUser.user.username);
-		// replace with one call to get all user data for current user
-		// getUserData to backend function getUser
-		this.props.fetchFollowers(this.props.currentUser.user.id);
-		this.props.fetchFollowing(this.props.currentUser.user.id);
+	async componentDidMount() {
+		if (this.props.currentUser.user.username != null) {
+			await this.props.fetchMessages();
+			await this.props.fetchUserData(this.props.currentUser.user.username);
+			// replace with one call to get all user data for current user
+			// getUserData to backend function getUser
+			await this.props.fetchFollowers(this.props.currentUser.user.id);
+			await this.props.fetchFollowing(this.props.currentUser.user.id);
+			this.setState({
+				isLoading: false
+			})
+		}
 	}
 
 	render(){
 		const { messages, followers, following, currentUser, user } = this.props;
 		if(!currentUser.isAuthenticated){
 			return (
-				<div className="home-hero">
+				<div className="home-hero page-content">
 					<h1>What's Happening</h1>
 					<h4>New to Warbler?</h4>
 					<Link to="/signup" className="btn btn-primary">
@@ -34,6 +41,20 @@ class Homepage extends Component {
 					</Link>
 				</div>
 			);
+		}
+		if(this.state.isLoading) {
+			return (
+				<div className="loading-container">
+					<div className="spinner">
+						<div className="right-side">
+							<div className="bar"></div>
+						</div>
+						<div className="left-side">
+							<div className="bar"></div>
+						</div>
+					</div>
+				</div>
+			)
 		}
 		return (
 			<MessageTimeLine
