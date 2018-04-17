@@ -4,6 +4,7 @@ import { configureStore } from '../store'
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navbar from './Navbar';
 import Main from './Main';
+import Footer from './Footer';
 import {setCurrentUser, setAuthorizationToken} from '../store/actions/auth';
 import jwtDecode from 'jwt-decode';
 
@@ -22,9 +23,10 @@ if(localStorage.jwtToken) {
 const App = () => (
 	<Provider store={store}>
 		<Router>
-			<div className="onboarding">
+			<div className="onboarding mdl-layout__content">
 				<Navbar />
 				<Main />
+				<Footer />
 			</div>
 		</Router>
 	</Provider>

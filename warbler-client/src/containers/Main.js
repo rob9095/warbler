@@ -12,7 +12,7 @@ import UserProfile from '../components/UserProfile';
 const Main = props => {
 	const {authUser, errors, removeError, currentUser } = props;
 	return(
-		<div className="container">
+		<div className="container page-content">
 			<Switch>
 				<Route exact path="/" render={props => <Homepage currentUser={currentUser} {...props} />} />
 				<Route

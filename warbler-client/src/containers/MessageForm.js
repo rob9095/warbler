@@ -7,19 +7,41 @@ class MessageForm extends Component {
     super(props);
     this.state= {
       message: '',
-      clientErrors: ''
+      submitButton: 'disabled',
+      clientErrors: '',
+      errorStyles: {
+        color: ''
+      }
     };
   }
 
-  handleNewMessage = event => {
-    event.preventDefault();
+  handleInputChange = e => {
+    this.setState({
+      message: e.target.value,
+    })
+    if (e.target.value === '') {
+      this.setState({
+        submitButton: 'disabled'
+      })
+    } else {
+      this.setState({
+        submitButton: ''
+      })
+    }
+  }
+
+  handleNewMessage = e => {
+    e.preventDefault();
     if(this.state.message !== '') {
       this.props.postNewMessage(this.state.message);
       this.setState({ message: '' });
       this.props.history.push('/');
     } else {
       this.setState({
-        clientErrors: 'Please type a message'
+        clientErrors: 'Please type a message',
+        errorStyles: {
+          color: '#D32F2F'
+        }
       })
     }
   };
@@ -41,11 +63,11 @@ class MessageForm extends Component {
                 className="mdl-textfield__input"
                 type="textarea"
                 value={this.state.message}
-                onChange={e => this.setState({ message: e.target.value })}
+                onChange={this.handleInputChange}
               />
-              <label className="mdl-textfield__label">Type Here...</label>
+              <label className="mdl-textfield__label" style={this.state.errorStyles}>Type Here...</label>
             </div>
-            <button className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            <button className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect" disabled={this.state.submitButton}>
               Add Message
             </button>
           </form>
