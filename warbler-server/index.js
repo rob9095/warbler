@@ -8,6 +8,7 @@ const authRoutes = require('./routes/auth');
 const followersRoutes = require('./routes/followers');
 const followingRoutes = require('./routes/following');
 const messagesRoutes = require('./routes/messages');
+const likesRoutes = require('./routes/likes');
 const usersRoutes = require('./routes/users');
 const db = require("./models");
 const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
@@ -25,6 +26,12 @@ app.use(
 	loginRequired,
 	ensureCorrectUser,
 	messagesRoutes);
+
+app.use(
+		'/api/users/:id/likes',
+		loginRequired,
+		ensureCorrectUser,
+		likesRoutes);
 
 app.use(
 		'/api/users/:username',
