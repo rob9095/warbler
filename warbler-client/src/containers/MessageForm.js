@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {postNewMessage} from '../store/actions/messages';
+import TextField from 'material-ui/TextField';
+
 
 class MessageForm extends Component {
   constructor(props) {
@@ -48,31 +50,31 @@ class MessageForm extends Component {
 
   render() {
     return(
-      <div className="new-message-container">
-        <h2>What's on Your Mind?</h2>
-        <div className="mdl-color--white mdl-shadow--2dp content mdl-color-text--grey-800 mdl-cell mdl-cell--6-col message-form-container">
-          <form className="new-message" onSubmit={this.handleNewMessage}>
-            {this.state.clientErrors && (
-              <div className="error red">{this.state.clientErrors}</div>
-            )}
-            {this.props.errors.message && (
-              <div className="alert alert-danger">{this.props.errors.message}</div>
-            )}
-            <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <textarea
-                className="mdl-textfield__input"
-                type="textarea"
-                value={this.state.message}
-                onChange={this.handleInputChange}
-              />
-              <label className="mdl-textfield__label" style={this.state.errorStyles}>Type Here...</label>
-            </div>
-            <button className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect" disabled={this.state.submitButton}>
-              Add Message
-            </button>
-          </form>
+        <div className="new-message-container">
+          <h2>What's on Your Mind?</h2>
+          <div className="mdl-color--white mdl-shadow--2dp content mdl-color-text--grey-800 mdl-cell mdl-cell--6-col message-form-container">
+            <form className="new-message" onSubmit={this.handleNewMessage}>
+              {this.state.clientErrors && (
+                <div className="error red">{this.state.clientErrors}</div>
+              )}
+              {this.props.errors.message && (
+                <div className="alert alert-danger">{this.props.errors.message}</div>
+              )}
+                <TextField
+                  className="mdl-textfield"
+                  label="Type Here..."
+                  multiline
+                  rowsMax="4"
+                  margin="normal"
+                  value={this.state.message}
+                  onChange={this.handleInputChange}
+                />
+              <button className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect" disabled={this.state.submitButton}>
+                Add Message
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
     )
   }
 

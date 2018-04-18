@@ -12,7 +12,7 @@ import UserProfile from '../components/UserProfile';
 const Main = props => {
 	const {authUser, errors, removeError, currentUser } = props;
 	return(
-		<div className="container page-content">
+		<div className="mdl-layout__content">
 			<Switch>
 				<Route exact path="/" render={props => <Homepage currentUser={currentUser} {...props} />} />
 				<Route

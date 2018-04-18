@@ -8,7 +8,7 @@ import Logo from '../images/warbler-logo.png';
 class Navbar extends Component {
 	render() {
 		return(
-			<div className="mdl-layout--fixed-header">
+			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   			<header className="mdl-layout__header">
 			    <div className="mdl-layout__header-row">
 						<Link className = "mdl-layout-title navbar-title-link" to="/">

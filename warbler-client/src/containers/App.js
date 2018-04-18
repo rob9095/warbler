@@ -7,6 +7,25 @@ import Main from './Main';
 import Footer from './Footer';
 import {setCurrentUser, setAuthorizationToken} from '../store/actions/auth';
 import jwtDecode from 'jwt-decode';
+import { render } from 'react-dom';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#6ec6ff',
+      main: '#2196f3',
+      dark: '#0069c0',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ffaf53',
+      main: '#f37e21',
+      dark: '#ba5000',
+      contrastText: '#fff',
+    },
+  },
+});
 
 const store = configureStore();
 
@@ -21,15 +40,17 @@ if(localStorage.jwtToken) {
 }
 
 const App = () => (
+	<MuiThemeProvider theme={theme}>
 	<Provider store={store}>
 		<Router>
-			<div className="onboarding mdl-layout__content">
+			<div className="onboarding mdl-layout__container">
 				<Navbar />
 				<Main />
 				<Footer />
 			</div>
 		</Router>
 	</Provider>
+</MuiThemeProvider>
 );
 
 export default App;
