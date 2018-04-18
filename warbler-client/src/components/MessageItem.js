@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import DefaultProfileImg from '../images/default-profile-image.jpg';
+import MessageDeleteButton from '../containers/MessageDeleteButton';
+import MessageCommentExpansion from '../containers/MessageCommentExpansion';
+import FavoriteButton from '../containers/FavoriteButton';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import IconButton from 'material-ui/IconButton';
 
 class MessageItem extends Component {
   constructor(props){
@@ -36,30 +41,30 @@ class MessageItem extends Component {
             <span className="message-text">
               {text}
             </span>
-            {!isCorrectUser && (
-              <div className="mdl-card__actions mdl-card--border message-options">
-                <div className="message-option">
-                  <button onClick={this.handleLike} className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                    <i className="material-icons">favorite</i>
-                  </button>
-                </div>
+          </div>
+          {!isCorrectUser && (
+            <div className="mdl-card__actions mdl-card--border message-options">
               <div className="message-option">
-                <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                  <i className="material-icons">textsms</i>
-                </button>
+                  <FavoriteButton
+                    key={messageKey}
+                   />
+              </div>
+            <div className="message-option">
+              <MessageCommentExpansion
+                key={messageKey}
+              />
+            </div>
+          </div>
+          )}
+          {isCorrectUser && (
+            <div className="mdl-card__actions mdl-card--border message-options current-user">
+              <div className="message-option">
+                <MessageDeleteButton
+                  removeMessage={removeMessage}
+                />
               </div>
             </div>
-            )}
-            {isCorrectUser && (
-              <div className="mdl-card__actions mdl-card--border message-options current-user">
-                <div className="message-option">
-                  <button onClick={removeMessage} className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                    <i className="material-icons delete-message">delete</i>
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
+          )}
         </li>
       </div>
     )

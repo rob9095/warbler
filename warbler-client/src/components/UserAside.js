@@ -36,7 +36,7 @@ class UserAside extends Component {
 			return <div />
 		}}
 		return(
-			<aside className="col-lg-4">
+			<aside className="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet user-widget">
 				<div className="user-card mdl-card mdl-shadow--2dp">
 				  <div className="mdl-card__title" style={inlineUserWidgetStyles}>
 				    <div className="user-image-wrapper">

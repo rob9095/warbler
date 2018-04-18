@@ -48,7 +48,7 @@ class NavbarDrawer extends Component {
           <div>
             <div className="user-image-wrapper drawer">
               <img className="user-profile-image" src={profileImageUrl || DefaultProfileImg} alt={username} height="40px"/>
-              <span className="mdl-layout-title">{username}</span>
+              <span className="mdl-layout-title">@{username}</span>
             </div>
             <div>
               <nav className="mdl-navigation">
