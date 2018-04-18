@@ -8,12 +8,14 @@ a.no-underline {
 }
 
 .row.top-pad {
-    padding-top: 35px;
+    padding-top: 110px;
+    display: flex;
+    justify-content: center;
 }
 
 .mdl-layout__content {
   width: 100%;
-  height: 100vh;
+  min-height: 90%;
   display: block;
 }
 
@@ -53,6 +55,11 @@ a.no-underline {
     flex-grow: 9999;
     margin-left: 45px;
 }
+@media (max-width: 1020px) {
+  .header-logo-container {
+      margin-left: 0px;
+  }
+}
 
 ul.nav.navbar-nav li {
 	margin: 0 0.5rem;
@@ -74,8 +81,8 @@ ul.nav.navbar-nav li {
 /* Home Page */
 
 .home-hero {
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -109,11 +116,14 @@ ul.nav.navbar-nav li {
   text-align: center;
 }
 
-.mdl-textfield__input {
-  margin-bottom: 6px;
-  height: 34px;
+.new-message-container .mdl-textfield {
+  margin-bottom: 20px;
 }
 
+.MuiInput-underline-19:hover:not(.MuiInput-disabled-18):before {
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.42) !important;
+}
 .message-form-container {
   display: flex;
   justify-content: center;
@@ -126,7 +136,7 @@ form.new-message {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    min-height: 150px;
 }
 form.new-message .mdl-textfield--floating-label .mdl-textfield__label {
   text-align:center;
@@ -174,7 +184,7 @@ a.btn.btn-success:hover {
 	display: flex;
 	justify-content: flex-start;
 }
-.message-area:hover {
+.message-item:hover {
 	box-shadow: 0 4px 4px 0 rgba(0,0,0,.14), 0 6px 1px -6px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
     -webkit-transition: .05s ease-out;
     -moz-transition: .05s ease-out;
@@ -202,13 +212,13 @@ a.btn.btn-success:hover {
 	padding: 10px 0 10px;
 }
 
-.message-area .message-options {
+.message-item .message-options {
+  background: #fff;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
 	width: 100%;
-	padding: 7px 0 0 0;
 }
 
 .message-area .text-muted{
@@ -220,13 +230,11 @@ i.delete-message {
   opacity: .6;
 }
 
-.message-area .message-options .message-option {
+.message-item .message-options .message-option {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  width: 36px;
-  height: 36px;
   color: rgba(0,0,0,.54);
 }
 
@@ -239,12 +247,15 @@ i.delete-message {
 
 ul#messages {
     list-style: none;
+    width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 
 /* User Profile Widget */
 
-aside.col-lg-4 {
+aside.user-widget {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
