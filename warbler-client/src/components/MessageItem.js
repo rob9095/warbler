@@ -22,7 +22,7 @@ class MessageItem extends Component {
 
 
   render(){
-    const { messageKey, isFollowing, date, profileImageUrl, text, username, removeMessage, followUser, unFollowUser, isCorrectUser, fetchUserData, currentUser } = this.props;
+    const { messageKey, isFollowing, isLiked, date, profileImageUrl, text, username, removeMessage,  isCorrectUser, currentUser } = this.props;
     return(
       <div>
         <li className="mdl-shadow--2dp message-item">
@@ -47,6 +47,9 @@ class MessageItem extends Component {
               <div className="message-option">
                   <FavoriteButton
                     key={messageKey}
+                    currentUser={currentUser}
+                    messageId={messageKey}
+                    isLiked={isLiked}
                    />
               </div>
             <div className="message-option">
