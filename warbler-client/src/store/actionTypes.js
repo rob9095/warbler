@@ -8,3 +8,5 @@ export const LOAD_FOLLOWERS = 'LOAD_FOLLOWERS';
 export const LOAD_FOLLOWING = 'LOAD_FOLLOWING';
 export const REMOVE_FOLLOWER = 'REMOVE_FOLLOWER';
 export const LOAD_USER = 'GET_USER';
+export const ADD_LIKE = 'ADD_LIKE';
+export const REMOVE_LIKE = 'REMOVE_LIKE';
