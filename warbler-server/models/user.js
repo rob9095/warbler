@@ -23,18 +23,22 @@ const userSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Message'
 	}],
+	// messageIds for the messages that the user has liked
+	likes: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Message'
+	}],
+	// likeIds for the likes that the user has recieved
 	likedMessages: [{
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Message'
+		ref: 'Like'
 	}],
-	messagesLiked: [{
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Message'
-	}],
+	// followerIds for the users followers
 	followers: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Follower'
 	}],
+	// followerIds for the users following
 	following: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Follower'

@@ -11,3 +11,4 @@ mongoose.connect('mongodb://localhost/warbler', options);
 module.exports.User = require('./user');
 module.exports.Message = require('./message');
 module.exports.Follower = require('./follower');
+module.exports.Like = require('./like');
