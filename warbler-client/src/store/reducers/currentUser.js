@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from '../actionTypes';
+import { SET_CURRENT_USER, ADD_LIKE, REMOVE_LIKE } from '../actionTypes';
 
 const DEFAULT_STATE = {
 	isAuthenticated: false,
@@ -12,6 +12,14 @@ export default (state = DEFAULT_STATE, action) => {
 				isAuthenticated: !!Object.keys(action.user).length,
 				user: action.user
 			};
+		case ADD_LIKE:
+	     let addState = state;
+			 addState.user.likes = [...addState.user.likes, action.message_id];
+	     return addState;
+	  case REMOVE_LIKE:
+			let removeState = state;
+	    removeState.user.likes = removeState.user.likes.filter(m => m !== action.message_id);
+			return removeState;
 		default:
 			return state;
 	}
