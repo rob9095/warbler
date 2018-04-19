@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withStyles } from 'material-ui/styles';
+import { likeMessage, unLikeMessage } from '../store/actions/likes';
 import classnames from 'classnames';
 import IconButton from 'material-ui/IconButton';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -20,17 +23,28 @@ const styles = theme => ({
 });
 
 class FavoriteButton extends Component {
-  state = {
-    liked: false
-   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      liked: this.props.isLiked
+    }
+    this.handleLikeClick = this.handleLikeClick.bind(this);
+  }
 
   handleLikeClick = () => {
+    if (this.state.liked) {
+      this.props.unLikeMessage(this.props.currentUser.user.id, this.props.messageId);
+    } else {
+      this.props.likeMessage(this.props.currentUser.user.id, this.props.messageId);
+    }
     this.setState({ liked: !this.state.liked });
   };
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, currentUser, messageId, isFollowing } = this.props;
+    {if(!currentUser){
+			return <div />
+		}}
     return (
       <div>
             <IconButton
@@ -50,4 +64,10 @@ FavoriteButton.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(FavoriteButton);
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser
+  };
+}
+
+export default compose(withStyles(styles), connect(mapStateToProps, { likeMessage, unLikeMessage }), )(FavoriteButton);

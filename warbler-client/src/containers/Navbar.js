@@ -6,6 +6,10 @@ import DefaultProfileImg from '../images/default-profile-image.jpg';
 import Logo from '../images/warbler-logo.png';
 
 class Navbar extends Component {
+constructor(props){
+	super(props);
+	this.state = {};
+}
 	render() {
 		return(
 			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -58,4 +62,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(Navbar);
+export default connect(mapStateToProps, {})(Navbar);

@@ -20,6 +20,7 @@ class ProfileMessageList extends Component {
         messageKey = {m._id}
         date={m.createdAt}
         text={m.text}
+        currentUser={currentUser}
         username={m.user.username}
         profileImageUrl={m.user.profileImageUrl}
         removeMessage={removeMessage.bind(this, m.user._id, m._id)}
@@ -28,6 +29,7 @@ class ProfileMessageList extends Component {
 		    unFollowUser={unFollowUser.bind(this, m.user._id, currentUser.user.id)}
         isCorrectUser={currentUser.user.id === m.user._id}
         isFollowing={following.includes(m.user._id)}
+        isLiked={currentUser.user.likes.includes(m._id)}
       />
   ));
   return (
