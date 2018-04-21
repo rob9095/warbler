@@ -3,7 +3,7 @@ const router = express.Router({mergeParams: true});
 
 const { getFollowing } = require('../handlers/followers');
 
-// prefixed with /api/user/:id/following
+// prefixed with /api/users/:id/following
 router.route('/').get(getFollowing);
 
 

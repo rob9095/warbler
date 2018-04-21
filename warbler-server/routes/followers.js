@@ -3,10 +3,10 @@ const router = express.Router({mergeParams: true});
 
 const { addFollower, getFollower, getFollowers, getFollowing, deleteFollower } = require('../handlers/followers');
 
-// prefixed with /api/user/:id/followers
+// prefixed with /api/users/:id/followers
 router.route('/').get(getFollowers);
 
-// prefixed with /api/user/:id/followers/:follower_id
+// prefixed with /api/users/:id/followers/
 router
 	.route('/:follower_id')
 	.post(addFollower)
