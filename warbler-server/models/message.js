@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./user');
+const Comment = require('./comment');
 
 const messageSchema = new mongoose.Schema(
 	{
@@ -16,6 +17,10 @@ const messageSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User'
 		}],
+		comments: [{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Comment'
+		}],
 	},
 	{
 		timestamps: true
@@ -24,11 +29,16 @@ const messageSchema = new mongoose.Schema(
 
 messageSchema.pre('remove', async function(next) {
 	try {
-		// find a user
+		// find the user
 		let user = await User.findById(this.user);
-		// remove the id the message from their messages list
+		// find the comments
+		let comments = await Comment.find({parentMessage: this.id})
+		// remove this message id from users messages/likes array
 		user.messages.remove(this.id);
-		// save that user
+		user.likes.remove(this.id);
+		// remove any comments associated with this message
+		comments.remove();
+		// save the user
 		await user.save();
 		// return next
 		return next();

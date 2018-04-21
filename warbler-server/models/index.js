@@ -12,3 +12,4 @@ module.exports.User = require('./user');
 module.exports.Message = require('./message');
 module.exports.Follower = require('./follower');
 module.exports.Like = require('./like');
+module.exports.Comment = require('./comment');
