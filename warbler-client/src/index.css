@@ -53,7 +53,6 @@ a.no-underline {
     flex-direction: column;
     align-items: center;
     flex-grow: 9999;
-    margin-left: 45px;
 }
 @media (max-width: 1020px) {
   .header-logo-container {
@@ -236,6 +235,11 @@ i.delete-message {
   align-items: flex-start;
   flex-direction: column;
   color: rgba(0,0,0,.54);
+  align-self: flex-start;
+}
+
+.message-item .message-options .message-option.comment-button {
+  width: 100%;
 }
 
 .message-area .text-muted {
@@ -260,6 +264,7 @@ aside.user-widget {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    max-width: 350px;
 }
 
 .user-card.mdl-card {
@@ -470,4 +475,113 @@ aside.user-widget {
   }
 }
 
-/* Dialogs */
+/* Comments */
+.comment-dropdown-container {
+  width: 100%;
+}
+
+.show-comment {
+  display: flex;
+  justify-content: center;
+  margin-top: -12px;
+  margin-bottom: 20px;
+  margin-left: -10%;
+}
+
+.show-comment .btn {
+  font-weight: bold;
+}
+
+.comment-container {
+    margin-top: -20px;
+    min-width: 300px;
+}
+
+.comment-container .comment-item {
+	color: #757575;
+	background: #EEEEEE;
+	display:flex;
+	align-items: center;
+	border-radius: 13px;
+  font-size: 14px;
+  line-height: 1.4em;
+  padding: 8px;
+  position: relative;
+	margin-top: 15px;
+}
+
+.comment-item img {
+  height: 24px;
+  width: 24px;
+}
+
+.comment-item .username {
+	font-weight:bold;
+	color: rgba(0,0,0,.87);
+	margin-right: 5px;
+  margin-left: -5px;
+}
+
+.comment-item .comment-text {
+	word-wrap: break-word;
+	width: 100%;
+}
+
+ul.comments li span.comment-delete i.material-icons {
+    color: #E53935;
+    font-size: small;
+    cursor: pointer;
+    margin-left: -9px;
+    margin-top: 3px;
+}
+
+ul.comments {
+    list-style: none;
+    display: flex;
+    margin-left: -58px;
+    flex-direction: column;
+}
+
+ul.comments li {
+  display: flex;
+}
+
+/* New Comment Form */
+
+form.comment-form {
+    color: #757575;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    padding: 8px;
+    margin-bottom: 20px;
+    margin-top: -20px;
+}
+
+form.comment-form .comment-input {
+  margin-top: 0px;
+}
+
+form.comment-form .comment-submit {
+  width: 36px;
+  height: 36px;
+}
+
+.comment-form img {
+  height: 24px;
+  width: 24px;
+}
+
+.comment-form .username {
+	font-weight:bold;
+	color: rgba(0,0,0,.87);
+	margin-right: 5px;
+  margin-left: -5px;
+}
+
+.comment-form .comment-text {
+	word-wrap: break-word;
+	width: 100%;
+  padding-right: 5px;
+}
