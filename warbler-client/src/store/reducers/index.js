@@ -5,6 +5,7 @@ import messages from './messages'
 import followers from './followers'
 import following from './following'
 import user from './users'
+import comments from './comments'
 
 const rootReducer = combineReducers({
 	currentUser,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
 	messages,
 	followers,
 	following,
-	user
+	user,
+	comments
 });
 
 export default rootReducer;
