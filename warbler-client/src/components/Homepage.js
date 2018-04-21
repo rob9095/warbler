@@ -18,7 +18,7 @@ class Homepage extends Component {
 	async componentDidMount() {
 		if (this.props.currentUser.user.username != null) {
 			await this.props.fetchMessages();
-			await this.props.fetchUserData(this.props.currentUser.user.username);
+			await this.props.fetchUserData(this.props.currentUser.user.username, this.props.currentUser.user.username);
 			// replace with one call to get all user data for current user
 			// getUserData to backend function getUser
 			await this.props.fetchFollowers(this.props.currentUser.user.id);

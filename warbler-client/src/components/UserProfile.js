@@ -17,7 +17,7 @@ class UserProfile extends Component {
 
 	async componentWillReceiveProps(newProps){
 		if (newProps.match.params.username != this.props.match.params.username){
-			await this.props.fetchUserData(newProps.match.params.username);
+			await this.props.fetchUserData(newProps.match.params.username, this.props.currentUser.user.username);
 			this.setState({
 				isLoading: false
 			})

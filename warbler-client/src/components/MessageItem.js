@@ -12,14 +12,7 @@ class MessageItem extends Component {
   constructor(props){
     super(props);
     this.state={};
-
-    this.handleLike = this.handleLike.bind(this);
   }
-
-  handleLike(e) {
-    console.log('you liked msg id '+ this.props.messageKey)
-  }
-
 
   render(){
     const { messageKey, isFollowing, isLiked, date, profileImageUrl, text, username, removeMessage,  isCorrectUser, currentUser } = this.props;
@@ -52,9 +45,11 @@ class MessageItem extends Component {
                     isLiked={isLiked}
                    />
               </div>
-            <div className="message-option">
+            <div className="message-option comment-button">
               <MessageCommentExpansion
                 key={messageKey}
+                messageId={messageKey}
+                currentUser={currentUser}
               />
             </div>
           </div>
@@ -74,29 +69,6 @@ class MessageItem extends Component {
   }
 
 }
-
-// <div>
-//   <li className="list-group-item">
-//     <img src={profileImageUrl || DefaultProfileImg} alt={username} height="100" width="100" className="timeline-image" />
-//     <div className="message-area">
-//       <Link to={`/users/${username}/profile`}>@{username}</Link>&nbsp;
-//       <span className="text-muted">
-//         <Moment className='text-muted' format='Do MMM YYYY'>
-//           {date}
-//         </Moment>
-//       </span>
-//       <p>{text}</p>
-//       <div className="">
-//         {isCorrectUser && (<a className="btn btn-danger" onClick={removeMessage}>Delete</a>)}
-//         {!isCorrectUser && (isFollowing ?
-//           <a className="btn btn-success" onClick={async function(event){ await unFollowUser(); fetchUserData()}}>Un-Follow</a>
-//           :
-//           <a className="btn btn-success" onClick={async function(event){ await followUser(); fetchUserData()}}>Follow</a>)
-//         }
-//       </div>
-//     </div>
-//   </li>
-// </div>
 
 
 export default MessageItem;
