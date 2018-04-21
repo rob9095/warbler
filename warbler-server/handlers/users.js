@@ -10,7 +10,9 @@ exports.getUser = async function(req, res, next) {
       profileImageUrl: user.profileImageUrl,
       messages: user.messages,
       followers: user.followers,
-      following: user.following
+      following: user.following,
+			likes: user.likes,
+			likedMessages: user.likedMessages
     })
 	} catch(err) {
 		return next(err);
