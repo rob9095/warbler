@@ -33,12 +33,10 @@ class ProfileMessageList extends Component {
       />
   ));
   return (
-    <div className="message-container">
-      <div className="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-        <ul className="list-group" id="messages">
-          {messageList}
-        </ul>
-      </div>
+    <div className="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet message-container">
+      <ul className="list-group" id="messages">
+        {messageList}
+      </ul>
     </div>
   );
   }
