@@ -13,9 +13,12 @@ export default (state = DEFAULT_STATE, action) => {
 				user: action.user
 			};
 		case UPDATE_CURRENT_USER:
-			let updatedState = state;
-			updatedState.user = action.user;
-			return updatedState;
+			return {
+				...state,
+				user: {
+					...action.user
+				}
+			}
 		case ADD_LIKE:
 	     let addState = state;
 			 addState.user.likes = [...addState.user.likes, action.message_id];

@@ -36,12 +36,13 @@ class CommentForm extends Component {
     e.preventDefault();
     if(this.state.comment !== '') {
       await this.props.createComment(this.state.comment, this.props.messageId);
-      this.props.loadNewComments();
+      this.setState({
+        comment: ''
+      })
     }
   };
 
   render() {
-    const { loadNewComments } = this.props;
     return(
       <form className="comment-form">
         {this.props.errors.message && (

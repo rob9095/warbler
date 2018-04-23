@@ -11,7 +11,7 @@ class ProfileTimeline extends Component {
 
 
 	render(){
-		const { username, currentUser, following, profileUser, userData, isCorrectUser, isFollowing, profileMessages }= this.props;
+		const { username, currentUser, following, userData, isFollowing, profileMessages }= this.props;
 		{if(!userData){
 			return <div />
 		}}
@@ -20,14 +20,14 @@ class ProfileTimeline extends Component {
 				<UserAside
 					username={username}
 					currentUser={currentUser}
-					profileUser={profileUser}
+					profileUser={userData.username}
 					profileMessages={profileMessages}
 					userData={userData}
-					isCorrectUser = {currentUser.user.username === profileUser}
+					isCorrectUser = {currentUser.user.username === userData.username}
 					isFollowing = {following.includes(userData.id)}
 				/>
 				<ProfileMessageList
-					profileUser={profileUser}
+					profileUser={userData.username}
 					profileMessages={profileMessages}
 					userData={userData}
 					currentUser={currentUser}

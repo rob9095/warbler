@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteComment } from '../store/actions/comments';
 import Moment from 'react-moment';
@@ -8,12 +9,17 @@ import MessageDeleteButton from '../containers/MessageDeleteButton';
 class CommentItem extends Component {
   constructor(props){
     super(props);
-    this.state={};
+    this.state = {};
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
+  handleDelete = () => {
+    // args -> currentUserID, commentID, messageID
+    this.props.deleteComment(this.props.currentUser.user.id, this.props.commentId, this.props.parentMessageId)
+  }
 
   render(){
-    const { commentId, date, text, username, profileImageUrl, isCorrectUser } = this.props;
+    const { commentId, date, text, username, profileImageUrl, isCorrectUser, currentUser, parentMessageId } = this.props;
     return(
         <li>
           <span className="comment-item">
@@ -22,16 +28,18 @@ class CommentItem extends Component {
                 <img className="mdl-chip__contact" src={profileImageUrl || DefaultProfileImg} alt={username} />
               </span>
             </Link>
-            <span className="username">
-              @{username}:
-            </span>
+            <Link to={`/users/${username}/profile`} className="no-underline">
+              <span className="username">
+                @{username}:
+              </span>
+            </Link>
             <span className="comment-text">
               {text}
             </span>
           </span>
           {isCorrectUser && (
-            <span class="comment-delete">
-              <i class="material-icons">cancel</i>
+            <span className="comment-delete">
+              <i onClick={this.handleDelete} className="material-icons">cancel</i>
             </span>
           )}
         </li>
@@ -40,4 +48,10 @@ class CommentItem extends Component {
 
 }
 
-export default CommentItem;
+function mapStateToProps(state) {
+  return {
+    comments: state.comments
+  };
+}
+
+export default connect(mapStateToProps, {deleteComment})(CommentItem);

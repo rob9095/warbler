@@ -14,7 +14,6 @@ class CommentList extends Component {
       isLoading: true,
       showForm: false
     }
-    this.loadNewComments = this.loadNewComments.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
   }
 
@@ -26,30 +25,16 @@ class CommentList extends Component {
 
   async componentDidMount(){
     await this.props.fetchComments(this.props.messageId);
-    setTimeout(() => {
-      this.setState({
-        isLoading: false,
-      })
-    }, 500)
+    this.setState({
+      isLoading: false,
+    })
   }
-
-  async loadNewComments() {
-      this.setState({
-        isLoading: true
-      })
-			await this.props.fetchComments(this.props.messageId);
-      setTimeout(() => {
-        this.setState({
-          isLoading: false
-        })
-      }, 500)
-	}
 
   render() {
     const { comments, messageId, currentUser } = this.props;
     if (this.state.isLoading) {
       return (
-        <CircularLoader />
+        <span />
       )
     }
     let commentList = comments[messageId].map(c => (
@@ -61,6 +46,8 @@ class CommentList extends Component {
         profileImageUrl={c.profileImageUrl}
         username={c.user.username}
         isCorrectUser={currentUser.user.id === c.user._id}
+        currentUser={currentUser}
+        parentMessageId={messageId}
       />
     ));
   return (
@@ -70,13 +57,12 @@ class CommentList extends Component {
           <Button color="primary" className="btn" onClick={this.toggleForm}>
             Add a Comment
           </Button>
-        </div>        
+        </div>
       )}
       {this.state.showForm && (
         <CommentForm
           messageId={messageId}
           currentUser={currentUser}
-          loadNewComments={this.loadNewComments}
         />
       )}
       <div className="comment-container">

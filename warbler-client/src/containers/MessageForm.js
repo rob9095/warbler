@@ -18,6 +18,9 @@ class MessageForm extends Component {
   }
 
   handleInputChange = e => {
+    if (this.state.message.length === 140) {
+      console.log('char limit reached')
+    }
     this.setState({
       message: e.target.value,
     })
@@ -63,6 +66,7 @@ class MessageForm extends Component {
                 <TextField
                   className="mdl-textfield"
                   label="Type Here..."
+                  maxLength="140"
                   multiline
                   rowsMax="4"
                   margin="normal"

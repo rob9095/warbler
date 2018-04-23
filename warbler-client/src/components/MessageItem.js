@@ -35,8 +35,8 @@ class MessageItem extends Component {
               {text}
             </span>
           </div>
+          <div className="mdl-card__actions mdl-card--border message-options">
           {!isCorrectUser && (
-            <div className="mdl-card__actions mdl-card--border message-options">
               <div className="message-option">
                   <FavoriteButton
                     key={messageKey}
@@ -45,24 +45,22 @@ class MessageItem extends Component {
                     isLiked={isLiked}
                    />
               </div>
-            <div className="message-option comment-button">
-              <MessageCommentExpansion
-                key={messageKey}
-                messageId={messageKey}
-                currentUser={currentUser}
-              />
-            </div>
-          </div>
           )}
           {isCorrectUser && (
-            <div className="mdl-card__actions mdl-card--border message-options current-user">
               <div className="message-option">
                 <MessageDeleteButton
                   removeMessage={removeMessage}
                 />
               </div>
-            </div>
           )}
+              <div className="message-option comment-button">
+                <MessageCommentExpansion
+                  key={messageKey}
+                  messageId={messageKey}
+                  currentUser={currentUser}
+                />
+              </div>
+          </div>
         </li>
       </div>
     )

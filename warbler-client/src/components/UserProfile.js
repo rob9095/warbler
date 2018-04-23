@@ -16,8 +16,16 @@ class UserProfile extends Component {
 	}
 
 	async componentWillReceiveProps(newProps){
-		if (newProps.match.params.username != this.props.match.params.username){
-			await this.props.fetchUserData(newProps.match.params.username, this.props.currentUser.user.username);
+		// if a new profile was routed to
+		if (newProps.match.params.username !== this.props.match.params.username){
+			this.setState({
+				isLoading: true
+			})
+			// if user is viewing their own profile, lets update their current user
+			if (newProps.match.params.username === this.props.currentUser.user.username ){
+			//	await this.props.fetchUserData(newProps.match.params.username, true);
+			}
+			await this.props.fetchUserData(newProps.match.params.username);
 			this.setState({
 				isLoading: false
 			})
@@ -95,7 +103,6 @@ class UserProfile extends Component {
 			following={following}
 			profileImageUrl={currentUser.user.profileImageUrl}
 			profileMessages={profileMessages}
-			profileUser={this.props.match.params.username}
 			userData={user}
 			/>
 		);
