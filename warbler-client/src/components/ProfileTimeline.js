@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import ProfileMessageList from '../containers/ProfileMessageList'
 import UserAside from './UserAside';
 
@@ -9,9 +8,8 @@ class ProfileTimeline extends Component {
 		this.state = {}
 	}
 
-
 	render(){
-		const { username, currentUser, following, userData, isFollowing, profileMessages }= this.props;
+		const { username, currentUser, userData, profileMessages }= this.props;
 		{if(!userData){
 			return <div />
 		}}
@@ -23,8 +21,8 @@ class ProfileTimeline extends Component {
 					profileUser={userData.username}
 					profileMessages={profileMessages}
 					userData={userData}
-					isCorrectUser = {currentUser.user.username === userData.username}
-					isFollowing = {following.includes(userData.id)}
+					isCorrectUser={currentUser.user.username === userData.username}
+					isFollowing={currentUser.user.following.includes(userData.id)}
 				/>
 				<ProfileMessageList
 					profileUser={userData.username}

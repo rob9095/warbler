@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../store/actions/messages';
 import { fetchUserData } from '../store/actions/users';
-import { fetchFollowers, fetchFollowing } from '../store/actions/followers';
 import { Link } from 'react-router-dom';
 import ProfileTimeLine from './ProfileTimeline';
 
@@ -35,10 +34,6 @@ class UserProfile extends Component {
 	async componentDidMount() {
 		await this.props.fetchMessages();
 		await this.props.fetchUserData(this.props.match.params.username);
-		// replace with one call to get all user data for current user
-		// getUserData to backend function getUser
-		await this.props.fetchFollowers(this.props.currentUser.user.id);
-		await this.props.fetchFollowing(this.props.currentUser.user.id);
 		this.setState({
 			isLoading: false
 		})
@@ -46,7 +41,7 @@ class UserProfile extends Component {
 
 	render(){
 
-		const { messages, followers, following, currentUser, user } = this.props;
+		const { messages, currentUser, user } = this.props;
 
 		// create messages to display if current user is viewing another users profile
 		let profileMessages = messages.filter(m => (m.user.username === this.props.match.params.username))
@@ -57,7 +52,7 @@ class UserProfile extends Component {
 			// create messages array with currentUsers followings messages
 			let followingMessages = [];
 			messages.forEach(function(m){
-				if (following.includes(m.user._id)){
+				if (currentUser.user.following.includes(m.user._id)){
 					followingMessages.push(m)
 				}
 			});
@@ -99,9 +94,6 @@ class UserProfile extends Component {
       <ProfileTimeLine
 			currentUser={currentUser}
 			username={currentUser.user.username}
-			followers={followers}
-			following={following}
-			profileImageUrl={currentUser.user.profileImageUrl}
 			profileMessages={profileMessages}
 			userData={user}
 			/>
@@ -114,10 +106,8 @@ function mapStateToProps(state) {
   return {
 		currentUser: state.currentUser,
     messages: state.messages,
-    followers: state.followers,
-    following: state.following,
 		user: state.user.userData
   };
 }
 
-export default connect(mapStateToProps, { fetchUserData, fetchMessages, fetchFollowers, fetchFollowing })(UserProfile);
+export default connect(mapStateToProps, { fetchUserData, fetchMessages })(UserProfile);

@@ -1,7 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { followUser, unFollowUser } from '../store/actions/followers';
-import { fetchUserData } from '../store/actions/users';
 import MessageList from '../containers/MessageList'
 import UserAside from './UserAside';
 
@@ -11,9 +8,7 @@ const MessageTimeline = props => {
 			<UserAside
 				profileImageUrl={props.profileImageUrl}
 				username={props.username}
-				messages={props.messages}
-				followers={props.followers}
-				following={props.following}
+				following={props.currentUser.user.following}
 				currentUser={props.currentUser}
 				userData={props.userData}
 				isCorrectUser = {true}
@@ -27,13 +22,4 @@ const MessageTimeline = props => {
 	);
 };
 
-function mapStateToProps(state) {
-  return {
-    messages: state.messages,
-    followers: state.followers,
-    following: state.following,
-    currentUser: state.currentUser
-  };
-}
-
-export default connect(mapStateToProps, {followUser, unFollowUser, fetchUserData})(MessageTimeline);
+export default MessageTimeline;

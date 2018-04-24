@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchMessages, removeMessage } from '../store/actions/messages';
 import { followUser, unFollowUser, } from '../store/actions/followers';
-import { fetchUserData } from '../store/actions/users';
 import DefaultProfileWidgetBg from '../images/default-user-bg.png';
 import DefaultProfileImg from '../images/default-profile-image.jpg';
 
@@ -18,12 +17,10 @@ class UserAside extends Component {
 
 	async handleFollow(){
 		await this.props.followUser(this.props.userData.id,this.props.currentUser.user.id);
-		this.props.fetchUserData(this.props.userData.username);
 	}
 
 	async handleUnFollow(){
 		await this.props.unFollowUser(this.props.userData.id,this.props.currentUser.user.id);
-		this.props.fetchUserData(this.props.userData.username);
 	}
 
 	render(){
@@ -31,7 +28,6 @@ class UserAside extends Component {
 		const inlineUserWidgetStyles = {
 			backgroundImage: `url('${DefaultProfileWidgetBg}')`
 		}
-
 		{if(!userData){
 			return <div />
 		}}
@@ -95,15 +91,7 @@ class UserAside extends Component {
 							</div>
 						</div>
 						)}
-
 				  </div>
-					{/* {isCorrectUser && (
-						<div className="mdl-card__menu">
-					    <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-					      <i className="material-icons">edit</i>
-					    </button>
-					  </div>
-					)} */}
 				</div>
 			</aside>
 		)
@@ -118,4 +106,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchMessages, removeMessage, unFollowUser, followUser, fetchUserData })(UserAside);
+export default connect(mapStateToProps, { fetchMessages, removeMessage, unFollowUser, followUser })(UserAside);
