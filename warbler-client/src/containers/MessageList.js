@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMessages, removeMessage } from '../store/actions/messages';
-import { followUser, unFollowUser, fetchFollowers, fetchFollowing } from '../store/actions/followers';
-import { fetchUserData } from '../store/actions/users';
+import { removeMessage } from '../store/actions/messages';
+import { followUser, unFollowUser } from '../store/actions/followers';
 import MessageItem from '../components/MessageItem';
 
 class MessageList extends Component {
@@ -13,7 +12,7 @@ class MessageList extends Component {
   }
 
   render() {
-    const { messages, followers, following, removeMessage, followUser, unFollowUser, currentUser, fetchUserData } = this.props;
+    const { messages, removeMessage, followUser, unFollowUser, currentUser } = this.props;
     let messageList = messages.map(m => (
       <MessageItem
         key={m._id}
@@ -25,10 +24,9 @@ class MessageList extends Component {
         profileImageUrl={m.user.profileImageUrl}
         removeMessage={removeMessage.bind(this, m.user._id, m._id)}
         followUser={followUser.bind(this, m.user._id, currentUser.user.id)}
-        fetchUserData={fetchUserData.bind(this, currentUser.user.username)}
 		    unFollowUser={unFollowUser.bind(this, m.user._id, currentUser.user.id)}
         isCorrectUser={currentUser.user.id === m.user._id}
-        isFollowing={following.includes(m.user._id)}
+        isFollowing={currentUser.user.following.includes(m.user._id)}
         isLiked={currentUser.user.likes.includes(m._id)}
       />
   ));
@@ -45,10 +43,8 @@ class MessageList extends Component {
 function mapStateToProps(state) {
   return {
     messages: state.messages,
-    followers: state.followers,
-    following: state.following,
     currentUser: state.currentUser
   };
 }
 
-export default connect(mapStateToProps, { fetchMessages, removeMessage, followUser, unFollowUser, fetchFollowers, fetchFollowing, fetchUserData })(MessageList);
+export default connect(mapStateToProps, { removeMessage, followUser, unFollowUser })(MessageList);
