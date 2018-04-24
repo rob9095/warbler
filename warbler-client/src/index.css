@@ -143,14 +143,13 @@ form.new-message .mdl-textfield--floating-label .mdl-textfield__label {
 
 
 /* Messages */
-#messages .list-group {
-  display: flex;
-  align-items: flex-start;
-  padding: 7px 20px 12px;
+
+#messages.list-group.profile-list {
+  margin-top: -35px;
 }
 
-#messages:not(.no-hover) .list-group-item:hover {
-  background-color: #e6ecf0;
+.feed-option.btn {
+  font-weight: bold;
 }
 
 .timeline-image {
