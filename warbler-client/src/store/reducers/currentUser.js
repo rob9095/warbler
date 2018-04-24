@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, ADD_LIKE, REMOVE_LIKE, UPDATE_CURRENT_USER } from '../actionTypes';
+import { SET_CURRENT_USER, ADD_LIKE, REMOVE_LIKE, UPDATE_CURRENT_USER, ADD_FOLLOWING, REMOVE_FOLLOWING } from '../actionTypes';
 
 const DEFAULT_STATE = {
 	isAuthenticated: false,
@@ -27,6 +27,22 @@ export default (state = DEFAULT_STATE, action) => {
 			let removeState = state;
 	    removeState.user.likes = removeState.user.likes.filter(m => m !== action.message_id);
 			return removeState;
+		case ADD_FOLLOWING:
+			return {
+				...state,
+				user: {
+					...state.user,
+					following: [...state.user.following, action.userFollowed_id]
+				}
+			}
+		case REMOVE_FOLLOWING:
+			return {
+				...state,
+				user: {
+					...state.user,
+					following: [...state.user.following.filter(f => f !== action.userFollowed_id)]
+				}
+			}
 		default:
 			return state;
 	}
