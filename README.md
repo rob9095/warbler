@@ -1,2 +1,2 @@
-# warbler-tests
-testing for warbler app
+# Warbler
+Simple twitter style clone built on MERN stack
