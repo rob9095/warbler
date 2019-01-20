@@ -47,10 +47,10 @@ class ProfileMessageList extends Component {
     <div className="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet message-container">
       <ul className="list-group profile-list" id="messages">
         <div className="profile-feed-options">
-          <Button color="primary" onClick={this.toggleFeed} className="feed-option btn">My Feed</Button>
-          <Button color="primary" onClick={this.toggleFeed} className="feed-option btn">My Messages</Button>
+          {/* <Button color="primary" onClick={this.toggleFeed} className="feed-option btn">My Feed</Button>
+          <Button color="primary" onClick={this.toggleFeed} className="feed-option btn">My Messages</Button> */}
         </div>
-        {this.state.showFeed ? messageList : ""}
+        {this.state.showFeed ? messageList : "No Messages"}
       </ul>
     </div>
   );

@@ -24,7 +24,7 @@ class UserAside extends Component {
 	}
 
 	render(){
-		const { username, currentUser, profileUser, userData, isCorrectUser, isFollowing }= this.props;
+		const { userData, isCorrectUser, isFollowing }= this.props;
 		const inlineUserWidgetStyles = {
 			backgroundImage: `url('${DefaultProfileWidgetBg}')`
 		}
@@ -69,7 +69,7 @@ class UserAside extends Component {
 						</button>)}
 						{isCorrectUser && (
 						<div className="mdl-card__user-options">
-							<div className="user-option">
+							{/* <div className="user-option">
 								<button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
 									<i className="material-icons">settings</i>
 								</button>
@@ -88,7 +88,13 @@ class UserAside extends Component {
 								<button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
 									<i className="material-icons">add</i>
 								</button>
-							</div>
+							</div> */}
+							<Link to={`/users/${userData.username}/messages/new`}>
+								<button
+									className="mdl-button mdl-button--raised	mdl-button--colored mdl-js-button mdl-js-ripple-effect follow-btn"
+									>Add Messsage
+								</button>
+							</Link>
 						</div>
 						)}
 				  </div>

@@ -58,7 +58,7 @@ class NavbarDrawer extends Component {
                 <Link onClick={this.closeDrawer}  className="mdl-navigation__link no-underline" to={`/users/${username}/profile`}>
                   <span><i className="material-icons">account_circle</i>  Profile</span>
                 </Link>
-                <a onClick={this.closeDrawer} className="mdl-navigation__link no-underline" href="#"><i className="material-icons">question_answer</i> Direct Messages</a>
+                {/* <a onClick={this.closeDrawer} className="mdl-navigation__link no-underline" href="#"><i className="material-icons">question_answer</i> Direct Messages</a> */}
                 <a className="mdl-navigation__link no-underline" onClick={this.logout}><i className="material-icons">exit_to_app</i> Logout</a>
               </nav>
             </div>

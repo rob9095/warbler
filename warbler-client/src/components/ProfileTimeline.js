@@ -14,7 +14,7 @@ class ProfileTimeline extends Component {
 			return <div />
 		}}
 		return (
-			<div className="row top-pad">
+			<div className="row">
 				<UserAside
 					username={username}
 					currentUser={currentUser}
