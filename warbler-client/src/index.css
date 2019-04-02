@@ -243,7 +243,6 @@ i.delete-message {
   align-items: flex-start;
   flex-direction: column;
   color: rgba(0,0,0,.54);
-  align-self: flex-start;
 }
 
 .message-item .message-options .message-option.comment-button {
@@ -592,4 +591,12 @@ form.comment-form .comment-submit {
 	word-wrap: break-word;
 	width: 100%;
   padding-right: 5px;
+}
+
+/* Production Style Overrides */
+.jss9 {
+    font-size: 48px;
+}
+.jss3 {
+    color: inherit;
 }
